@@ -31,7 +31,6 @@ async function spinReel(reelIndex: number, rotations: number) {
       reels.value[reelIndex][reels.value[reelIndex].length - 1],
       ...reels.value[reelIndex],
     ].slice(0, -1);
-    console.log(reels.value);
 
     const rotationDuration = 100; // Adjust the base interval duration (in milliseconds) to control the spinning speed
     await sleep(rotationDuration);
