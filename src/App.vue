@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
+import SlotMachine from "./components/SlotMachine.vue";
 </script>
 
 <template>
-  <div class="bg-black">
-    <HelloWorld msg="Vite + Vue" />
+  <div
+    class="d-flex align-items-center justify-content-center"
+    style="height: 100vh; width: 100vw"
+  >
+    <SlotMachine />
   </div>
 </template>
