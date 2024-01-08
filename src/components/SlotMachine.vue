@@ -41,7 +41,7 @@
       class="btn btn-danger btn-lg rounded-circle mb-3"
       style="width: 100px; height: 100px; font-size: 18px; cursor: pointer"
     >
-      Spin
+      Spin {{ spinning }}
     </button>
   </div>
 </template>
@@ -57,27 +57,33 @@ const reels = ref([
 
 const spinning = ref(false);
 
-function spin(rotationsPerReel = undefined) {
-  if (spinning.value) return;
-
-  spinning.value = true;
-
-  const totalSpins = rotationsPerReel ? rotationsPerReel : getRandomRotations();
-  let spins = 0;
-
-  const spinInterval = setInterval(() => {
-    reels.value = reels.value.map((a) => [a[a.length - 1], ...a].slice(0, -1));
-    console.log(reels.value);
-
-    spins++;
-    if (spins === totalSpins) {
-      clearInterval(spinInterval);
-      spinning.value = false;
-    }
-  }, 500); // Adjust the interval duration (in milliseconds) to control the spinning speed
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function getRandomRotations() {
-  return Math.floor(Math.random() * 10) + 1; // Adjust the range as needed
+async function spin() {
+  if (spinning.value) return;
+  spinning.value = true;
+
+  const rotations = [10, 12, 15]; // Adjust the total number of rotations for each reel
+
+  for (let i = 0; i < reels.value.length; i++) {
+    spinReel(i, rotations[i]);
+  }
+
+  spinning.value = false;
+}
+
+async function spinReel(reelIndex: number, rotations: number) {
+  for (let i = 0; i < rotations; i++) {
+    reels.value[reelIndex] = [
+      reels.value[reelIndex][reels.value[reelIndex].length - 1],
+      ...reels.value[reelIndex],
+    ].slice(0, -1);
+    console.log(reels.value);
+
+    const rotationDuration = 100; // Adjust the base interval duration (in milliseconds) to control the spinning speed
+    await sleep(rotationDuration);
+  }
 }
 </script>
