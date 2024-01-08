@@ -5,20 +5,9 @@ import { spinning, reels } from "../game";
   <div
     v-for="(symbols, index) in reels"
     :key="index"
-    class="reel border border-3 border-dark rounded-3 bg-light"
+    class="reel border border-3 border-dark rounded-3 bg-light p-2 d-flex flex-column align-items-center me-5"
     :class="{ active: spinning }"
-    style="
-      /* border: 3px solid #000000;
-      border-radius: 10px; */
-      padding: 20px;
-      width: 100px;
-      height: 250px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-right: 10px;
-      transition: border-color 0.5s ease-in-out;
-    "
+    style="width: 250px; height: 400px"
   >
     <div
       v-for="(symbol, symbolIndex) in symbols"

@@ -16,7 +16,7 @@ export async function spin() {
   if (spinning.value) return;
   spinning.value = true;
 
-  const rotations = [10, 12, 15]; // Adjust the total number of rotations for each reel
+  const rotations = [11, 17, 29]; // Adjust the total number of rotations for each reel
 
   for (let i = 0; i < reels.value.length; i++) {
     spinReel(i, rotations[i]);
